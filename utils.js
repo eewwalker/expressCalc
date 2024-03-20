@@ -10,7 +10,7 @@ function convertStrNums(strNums) {
   // be handled in your route
   const nums = strNums.map(n => {
 
-    if (isNaN(n)) {
+    if (Number.isNaN(n)) {
       throw new BadRequestError(`value:${n} is not a number`);
 
     } else {
