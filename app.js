@@ -19,8 +19,8 @@ app.get('/mean', function (req, res) {
 
   }
 
-  const strToNum = convertStrNums(req.query.nums.split(','));
-  const mean = findMean(strToNum);
+  const nums = convertStrNums(req.query.nums.split(','));
+  const mean = findMean(nums);
 
   return res.json({
 
@@ -33,9 +33,45 @@ app.get('/mean', function (req, res) {
 
 
 /** Finds median of nums in qs: returns {operation: "median", result } */
+app.get('/median', function (req, res) {
+
+  if (!req.query.nums) {
+    throw new BadRequestError('nums are required');
+
+  }
+
+  const nums = convertStrNums(req.query.nums.split(','));
+  const median = findMedian(nums);
+
+  return res.json({
+
+    operation: 'median',
+    value: median
+
+  });
+
+});
 
 
 /** Finds mode of nums in qs: returns {operation: "mean", result } */
+app.get('/mode', function (req, res) {
+
+  if (!req.query.nums) {
+    throw new BadRequestError('nums are required');
+
+  }
+
+  const nums = convertStrNums(req.query.nums.split(','));
+  const mode = findMode(nums);
+
+  return res.json({
+
+    operation: 'mode',
+    value: mode
+
+  });
+
+});
 
 
 /** 404 handler: matches unmatched routes; raises NotFoundError. */
